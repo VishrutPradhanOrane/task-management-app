@@ -6,7 +6,10 @@ sap.ui.define([
 	return Controller.extend("taskmanagement.webapp.controller.App", {
 		onInit: function () {
 			var that = this;
-			// Wait for router to be initialized
+			// Store reference to App container for router
+			this._oApp = this.byId("app");
+			
+			// Wait for router to be initialized and App to be ready
 			setTimeout(function() {
 				// Check if user is already logged in
 				var sCurrentUser = sessionStorage.getItem("currentUser");
@@ -26,7 +29,12 @@ sap.ui.define([
 						}
 					}
 				}
-			}, 100);
+			}, 200);
+		},
+		
+		onAfterRendering: function() {
+			// App is fully rendered, router should be ready now
+			this._oApp = this.byId("app");
 		}
 	});
 });
