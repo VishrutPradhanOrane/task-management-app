@@ -1,0 +1,319 @@
+<mvc:View
+	controllerName="taskmanagement.webapp.controller.TaskList"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout"
+	xmlns:unified="sap.ui.unified"
+	displayBlock="true">
+	<Page id="page" title="Task Management">
+		<headerContent>
+			<Text text="{user>/name}" class="sapUiTinyMarginEnd"/>
+			<Button
+				icon="sap-icon://download"
+				text="Export CSV"
+				press="onExportCSV"
+				class="sapUiTinyMarginEnd"/>
+			<Button
+				icon="sap-icon://add"
+				text="New Task"
+				press="onAddTask"
+				type="Emphasized"
+				class="sapUiTinyMarginEnd"/>
+			<Button
+				icon="sap-icon://log"
+				text="Logout"
+				press="onLogout"
+				type="Transparent"/>
+		</headerContent>
+		<content>
+			<!-- Welcome Dashboard Banner -->
+			<Panel headerText="Welcome to Task Management" class="sapUiMediumMargin">
+				<content>
+					<VBox class="sapUiMediumMargin">
+						<Text text="Manage your team's tasks efficiently. Track progress, monitor deadlines, and stay organized." class="sapUiTinyMarginBottom"/>
+						<HBox class="sapUiSmallMarginTop">
+							<ProgressIndicator
+								percentValue="{stats>/completionRate}"
+								displayValue="{stats>/completed} of {stats>/total} completed"
+								showValue="true"
+								state="Success"
+								width="100%"
+								class="sapUiTinyMarginEnd"/>
+						</HBox>
+					</VBox>
+				</content>
+			</Panel>
+
+			<!-- Statistics Cards -->
+			<Panel headerText="Task Overview" class="sapUiMediumMargin">
+				<content>
+					<layout:Grid defaultSpan="XL2 L2 M4 S6" class="sapUiSmallMargin">
+						<f:Card class="sapUiTinyMargin">
+							<f:content>
+								<VBox class="sapUiContentPadding">
+									<Title text="Total Tasks" level="H5" class="sapUiTinyMarginBottom"/>
+									<HBox alignItems="Center" class="sapUiTinyMarginBottom">
+										<core:Icon src="sap-icon://task" size="2rem" class="sapUiTinyMarginEnd" color="#0070F2"/>
+										<Title text="{stats>/total}" level="H1"/>
+									</HBox>
+									<Text text="All active tasks in the system"/>
+								</VBox>
+							</f:content>
+						</f:Card>
+						<f:Card class="sapUiTinyMargin">
+							<f:content>
+								<VBox class="sapUiContentPadding">
+									<Title text="Pending" level="H5" class="sapUiTinyMarginBottom"/>
+									<HBox alignItems="Center" class="sapUiTinyMarginBottom">
+										<core:Icon src="sap-icon://pending" size="2rem" class="sapUiTinyMarginEnd" color="#FFB300"/>
+										<Title text="{stats>/pending}" level="H1"/>
+									</HBox>
+									<ObjectStatus
+										text="Awaiting action"
+										state="Warning"/>
+								</VBox>
+							</f:content>
+						</f:Card>
+						<f:Card class="sapUiTinyMargin">
+							<f:content>
+								<VBox class="sapUiContentPadding">
+									<Title text="In Progress" level="H5" class="sapUiTinyMarginBottom"/>
+									<HBox alignItems="Center" class="sapUiTinyMarginBottom">
+										<core:Icon src="sap-icon://in-progress" size="2rem" class="sapUiTinyMarginEnd" color="#0070F2"/>
+										<Title text="{stats>/inProgress}" level="H1"/>
+									</HBox>
+									<ObjectStatus
+										text="Active work"
+										state="Information"/>
+								</VBox>
+							</f:content>
+						</f:Card>
+						<f:Card class="sapUiTinyMargin">
+							<f:content>
+								<VBox class="sapUiContentPadding">
+									<Title text="Completed" level="H5" class="sapUiTinyMarginBottom"/>
+									<HBox alignItems="Center" class="sapUiTinyMarginBottom">
+										<core:Icon src="sap-icon://accept" size="2rem" class="sapUiTinyMarginEnd" color="#107E3E"/>
+										<Title text="{stats>/completed}" level="H1"/>
+									</HBox>
+									<ObjectStatus
+										text="Finished tasks"
+										state="Success"/>
+								</VBox>
+							</f:content>
+						</f:Card>
+						<f:Card class="sapUiTinyMargin">
+							<f:content>
+								<VBox class="sapUiContentPadding">
+									<Title text="Overdue" level="H5" class="sapUiTinyMarginBottom"/>
+									<HBox alignItems="Center" class="sapUiTinyMarginBottom">
+										<core:Icon src="sap-icon://alert" size="2rem" class="sapUiTinyMarginEnd" color="#E53935"/>
+										<Title text="{stats>/overdue}" level="H1"/>
+									</HBox>
+									<ObjectStatus
+										text="Requires attention"
+										state="Error"/>
+								</VBox>
+							</f:content>
+						</f:Card>
+					</layout:Grid>
+				</content>
+			</Panel>
+
+			<!-- Quick Actions and Priority Tasks -->
+			<layout:Grid defaultSpan="XL6 L6 M12 S12" class="sapUiMediumMargin">
+				<Panel headerText="Quick Actions">
+					<content>
+						<VBox class="sapUiMediumMargin">
+							<Button
+								icon="sap-icon://add"
+								text="Create New Task"
+								press="onAddTask"
+								type="Emphasized"
+								width="100%"
+								class="sapUiTinyMarginBottom"/>
+							<Button
+								icon="sap-icon://download"
+								text="Export All Tasks"
+								press="onExportCSV"
+								width="100%"
+								class="sapUiTinyMarginBottom"/>
+							<Button
+								icon="sap-icon://refresh"
+								text="Refresh View"
+								press="onRefresh"
+								width="100%"/>
+						</VBox>
+					</content>
+				</Panel>
+				<Panel headerText="High Priority Tasks">
+					<content>
+						<List
+							items="{highPriority>/Tasks}"
+							class="sapUiNoContentPadding">
+							<StandardListItem
+								title="{highPriority>title}"
+								description="{highPriority>assignee} - Due: {path: 'highPriority>dueDate', formatter: '.formatDate'}"
+								info="{highPriority>status}"
+								infoState="{path: 'highPriority>status', formatter: '.formatStatusState'}"
+								type="Active"
+								press="onTaskItemPress"/>
+						</List>
+					</content>
+				</Panel>
+			</layout:Grid>
+
+			<!-- Task Table -->
+			<Table
+				id="tasksTable"
+				items="{tasks>/Tasks}"
+				mode="MultiSelect"
+				selectionChange="onSelectionChange"
+				growing="true"
+				growingThreshold="10"
+				class="sapUiMediumMargin">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title text="Tasks" level="H2"/>
+						<ToolbarSpacer/>
+						<Button
+							id="bulkDeleteBtn"
+							icon="sap-icon://delete"
+							text="Delete Selected"
+							press="onBulkDelete"
+							enabled="{= ${selectedCount} > 0 }"
+							type="Reject"
+							class="sapUiTinyMarginEnd"/>
+						<Button
+							id="bulkStatusBtn"
+							icon="sap-icon://status-in-process"
+							text="Change Status"
+							press="onBulkStatusChange"
+							enabled="{= ${selectedCount} > 0 }"
+							class="sapUiTinyMarginEnd"/>
+						<SearchField
+							width="20rem"
+							placeholder="Search tasks..."
+							search="onSearch"
+							liveChange="onSearch"
+							class="sapUiTinyMarginEnd"/>
+						<Select
+							id="assigneeFilter"
+							width="12rem"
+							selectedKey="all"
+							change="onAssigneeFilterChange"
+							class="sapUiTinyMarginEnd">
+							<core:Item key="all" text="All Assignees"/>
+						</Select>
+						<Select
+							id="categoryFilter"
+							width="12rem"
+							selectedKey="all"
+							change="onCategoryFilterChange"
+							class="sapUiTinyMarginEnd">
+							<core:Item key="all" text="All Categories"/>
+						</Select>
+						<Select
+							id="sortSelect"
+							width="12rem"
+							selectedKey="dueDate"
+							change="onSortChange"
+							class="sapUiTinyMarginEnd">
+							<core:Item key="dueDate" text="Sort by Due Date"/>
+							<core:Item key="priority" text="Sort by Priority"/>
+							<core:Item key="status" text="Sort by Status"/>
+							<core:Item key="assignee" text="Sort by Assignee"/>
+							<core:Item key="title" text="Sort by Title"/>
+						</Select>
+						<SegmentedButton selectedKey="all" selectionChange="onFilterChange">
+							<items>
+								<SegmentedButtonItem text="All" key="all"/>
+								<SegmentedButtonItem text="Pending" key="Pending"/>
+								<SegmentedButtonItem text="In Progress" key="In Progress"/>
+								<SegmentedButtonItem text="Completed" key="Completed"/>
+							</items>
+						</SegmentedButton>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="Title"/>
+					</Column>
+					<Column>
+						<Text text="Category"/>
+					</Column>
+					<Column>
+						<Text text="Assignee"/>
+					</Column>
+					<Column>
+						<Text text="Priority"/>
+					</Column>
+					<Column>
+						<Text text="Status"/>
+					</Column>
+					<Column>
+						<Text text="Due Date"/>
+					</Column>
+					<Column width="100px">
+						<Text text="Actions"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem
+						type="Active"
+						selected="{tasks>selected}">
+						<cells>
+							<ObjectIdentifier
+								title="{tasks>title}"
+								text="{tasks>description}"/>
+							<Text text="{tasks>category}"/>
+							<Text text="{tasks>assignee}"/>
+							<ObjectStatus
+								text="{tasks>priority}"
+								state="{
+									path: 'tasks>priority',
+									formatter: '.formatPriorityState'
+								}"/>
+							<ObjectStatus
+								text="{tasks>status}"
+								state="{
+									path: 'tasks>status',
+									formatter: '.formatStatusState'
+								}"/>
+							<HBox>
+								<Text text="{
+									path: 'tasks>dueDate',
+									formatter: '.formatDate'
+								}"/>
+								<core:Icon
+									src="sap-icon://alert"
+									color="#E53935"
+									visible="{
+										path: 'tasks>dueDate',
+										formatter: '.isOverdue'
+									}"
+									class="sapUiTinyMarginBegin"
+									tooltip="Overdue"/>
+							</HBox>
+							<HBox>
+								<Button
+									icon="sap-icon://edit"
+									tooltip="Edit"
+									press="onEditTask"
+									type="Transparent"
+									class="sapUiTinyMarginEnd"/>
+								<Button
+									icon="sap-icon://delete"
+									tooltip="Delete"
+									press="onDeleteTask"
+									type="Transparent"/>
+							</HBox>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+	</Page>
+</mvc:View>

@@ -1,0 +1,92 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.f"
+	xmlns:form="sap.ui.layout.form">
+	<Dialog
+		id="taskDialog"
+		title="{= ${taskModel>/isEdit} ? 'Edit Task' : 'Create New Task'}"
+		contentWidth="500px">
+		<content>
+			<form:SimpleForm
+				editable="true"
+				layout="ResponsiveGridLayout"
+				labelSpanXL="4"
+				labelSpanL="4"
+				labelSpanM="4"
+				labelSpanS="12"
+				adjustLabelSpan="false"
+				emptySpanXL="0"
+				emptySpanL="0"
+				emptySpanM="0"
+				emptySpanS="0"
+				columnsXL="2"
+				columnsL="2"
+				columnsM="2"
+				singleContainerFullSize="false">
+				<form:content>
+					<Label text="Title *" required="true"/>
+					<Input
+						value="{taskModel>task/title}"
+						placeholder="Enter task title"/>
+					
+					<Label text="Description"/>
+					<TextArea
+						value="{taskModel>task/description}"
+						rows="3"
+						placeholder="Enter task description"/>
+					
+					<Label text="Assignee *" required="true"/>
+					<Input
+						value="{taskModel>task/assignee}"
+						placeholder="Enter assignee name"/>
+					
+					<Label text="Category"/>
+					<Input
+						value="{taskModel>task/category}"
+						placeholder="Enter category (e.g., Finance, HR, IT)"/>
+					
+					<Label text="Priority"/>
+					<Select
+						selectedKey="{taskModel>task/priority}"
+						forceSelection="false">
+						<items>
+							<core:Item key="Low" text="Low"/>
+							<core:Item key="Medium" text="Medium"/>
+							<core:Item key="High" text="High"/>
+						</items>
+					</Select>
+					
+					<Label text="Status"/>
+					<Select
+						selectedKey="{taskModel>task/status}"
+						forceSelection="false">
+						<items>
+							<core:Item key="Pending" text="Pending"/>
+							<core:Item key="In Progress" text="In Progress"/>
+							<core:Item key="Completed" text="Completed"/>
+						</items>
+					</Select>
+					
+					<Label text="Due Date *" required="true"/>
+					<DatePicker
+						value="{taskModel>task/dueDate}"
+						valueFormat="yyyy-MM-dd"
+						displayFormat="medium"/>
+				</form:content>
+			</form:SimpleForm>
+		</content>
+		<beginButton>
+			<Button
+				text="Save"
+				type="Emphasized"
+				press="onSaveTask"/>
+		</beginButton>
+		<endButton>
+			<Button
+				text="Cancel"
+				press="onCancelTask"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
+

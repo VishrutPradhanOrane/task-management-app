@@ -1,0 +1,115 @@
+{
+	"Tasks": [
+		{
+			"id": "1",
+			"title": "Review Q4 Budget Proposal",
+			"description": "Review and approve the Q4 budget proposal from finance team",
+			"assignee": "John Smith",
+			"status": "In Progress",
+			"priority": "High",
+			"category": "Finance",
+			"dueDate": "2024-12-15",
+			"createdDate": "2024-11-01"
+		},
+		{
+			"id": "2",
+			"title": "Team Performance Review",
+			"description": "Conduct annual performance reviews for the development team",
+			"assignee": "Sarah Johnson",
+			"status": "Pending",
+			"priority": "High",
+			"category": "HR",
+			"dueDate": "2024-12-20",
+			"createdDate": "2024-11-05"
+		},
+		{
+			"id": "3",
+			"title": "Update Project Timeline",
+			"description": "Update the project timeline based on recent changes",
+			"assignee": "Mike Davis",
+			"status": "Completed",
+			"priority": "Medium",
+			"category": "Project Management",
+			"dueDate": "2024-11-30",
+			"createdDate": "2024-10-25"
+		},
+		{
+			"id": "4",
+			"title": "Client Meeting Preparation",
+			"description": "Prepare presentation materials for upcoming client meeting",
+			"assignee": "Emily Brown",
+			"status": "In Progress",
+			"priority": "High",
+			"category": "Sales",
+			"dueDate": "2024-12-10",
+			"createdDate": "2024-11-10"
+		},
+		{
+			"id": "5",
+			"title": "Hiring New Team Member",
+			"description": "Interview candidates for the open senior developer position",
+			"assignee": "David Wilson",
+			"status": "Pending",
+			"priority": "Medium",
+			"category": "HR",
+			"dueDate": "2024-12-25",
+			"createdDate": "2024-11-08"
+		},
+		{
+			"id": "6",
+			"title": "Quarterly Report Submission",
+			"description": "Prepare and submit quarterly business report to management",
+			"assignee": "John Smith",
+			"status": "Pending",
+			"priority": "High",
+			"category": "Finance",
+			"dueDate": "2024-12-05",
+			"createdDate": "2024-11-15"
+		},
+		{
+			"id": "7",
+			"title": "Training Program Planning",
+			"description": "Plan and schedule Q1 training programs for the team",
+			"assignee": "Sarah Johnson",
+			"status": "In Progress",
+			"priority": "Medium",
+			"category": "HR",
+			"dueDate": "2024-12-28",
+			"createdDate": "2024-11-12"
+		},
+		{
+			"id": "8",
+			"title": "Vendor Contract Review",
+			"description": "Review and negotiate vendor contracts for next year",
+			"assignee": "Emily Brown",
+			"status": "Pending",
+			"priority": "High",
+			"category": "Procurement",
+			"dueDate": "2024-12-18",
+			"createdDate": "2024-11-20"
+		},
+		{
+			"id": "9",
+			"title": "System Security Audit",
+			"description": "Conduct security audit of all systems and applications",
+			"assignee": "Mike Davis",
+			"status": "Completed",
+			"priority": "High",
+			"category": "IT",
+			"dueDate": "2024-11-25",
+			"createdDate": "2024-10-30"
+		},
+		{
+			"id": "10",
+			"title": "Marketing Campaign Launch",
+			"description": "Launch the new product marketing campaign",
+			"assignee": "David Wilson",
+			"status": "In Progress",
+			"priority": "Medium",
+			"category": "Marketing",
+			"dueDate": "2024-12-22",
+			"createdDate": "2024-11-18"
+		}
+	]
+}
+

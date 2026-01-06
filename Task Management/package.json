@@ -1,0 +1,16 @@
+{
+  "name": "task-management",
+  "version": "1.0.0",
+  "description": "Task Management Application built with SAP UI5",
+  "scripts": {
+    "start": "python -m http.server 8000"
+  },
+  "keywords": [
+    "ui5",
+    "sap",
+    "task-management"
+  ],
+  "author": "",
+  "license": "MIT"
+}
+

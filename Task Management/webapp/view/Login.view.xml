@@ -1,0 +1,63 @@
+<mvc:View
+	controllerName="taskmanagement.webapp.controller.Login"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.f"
+	displayBlock="true">
+	<Page id="loginPage" title="Task Management System" class="sapUiContentPadding">
+		<content>
+			<VBox alignItems="Center" justifyContent="Center" class="sapUiLargeMarginTop">
+				<VBox width="400px" class="sapUiMediumMargin">
+					<f:Card class="sapUiMediumMargin">
+						<f:content>
+							<VBox class="sapUiLargeMargin">
+								<core:Icon
+									src="sap-icon://task"
+									size="4rem"
+									color="#0070F2"
+									class="sapUiMediumMarginBottom"/>
+								<Title text="Task Management" level="H1" class="sapUiMediumMarginBottom"/>
+								<Text text="Sign in to manage your team's tasks" class="sapUiTinyMarginBottom"/>
+								
+								<VBox class="sapUiLargeMarginTop">
+									<Label text="Username" required="true" class="sapUiTinyMarginTop"/>
+									<Input
+										id="usernameInput"
+										placeholder="Enter your username"
+										value=""
+										class="sapUiTinyMarginBottom"
+										liveChange="onUsernameChange"/>
+									
+									<Label text="Password" required="true" class="sapUiTinyMarginTop"/>
+									<Input
+										id="passwordInput"
+										type="Password"
+										placeholder="Enter your password"
+										value=""
+										class="sapUiTinyMarginBottom"
+										liveChange="onPasswordChange"/>
+									
+									<Button
+										id="loginButton"
+										text="Sign In"
+										type="Emphasized"
+										width="100%"
+										press="onLogin"
+										class="sapUiMediumMarginTop"
+										enabled="false"/>
+									
+									<Text text="Demo Credentials:" class="sapUiTinyMarginTop"/>
+									<Text text="Manager: manager / manager123" class="sapUiTinyMarginTop"/>
+									<Text text="Admin: admin / admin123" class="sapUiTinyMarginTop"/>
+								</VBox>
+							</VBox>
+						</f:content>
+					</f:Card>
+				</VBox>
+			</VBox>
+		</content>
+	</Page>
+</mvc:View>
+

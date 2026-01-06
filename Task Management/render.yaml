@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: task-management
+    env: static
+    buildCommand: echo "No build needed for static UI5 app"
+    staticPublishPath: .
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
